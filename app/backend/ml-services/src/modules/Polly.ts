@@ -16,6 +16,7 @@ export class Polly {
     }
 
     async synthesizeSpeech(request: PollyRequest): Promise<PollyResponse> {
+        // Voices: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
         var params = new SynthesizeSpeechCommand({
             OutputFormat: 'mp3',
             Engine: 'neural',

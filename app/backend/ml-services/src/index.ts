@@ -13,7 +13,7 @@ export const handler = async (event: any, context: any): Promise<any> => {
         let responseBody;
         switch (event.requestContext.resourcePath) {
             case '/comprehend':
-                responseBody = await comprehend.handle(JSON.parse(event.body));
+                responseBody = await comprehend.detectSentiment(JSON.parse(event.body));
                 break;
             case '/translate':
                 responseBody = await translate.handle(JSON.parse(event.body));

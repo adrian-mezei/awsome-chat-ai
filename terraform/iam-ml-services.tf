@@ -10,6 +10,7 @@ data "aws_iam_policy_document" "lambda_handler_assume_role_ml_services" {
 
 data "aws_iam_policy_document" "lambda_handler_ml_services" {
   statement {
+    sid = "CloudWatchLogging"
     actions = [
       "logs:CreateLogStream",
       "logs:PutLogEvents"
@@ -18,6 +19,7 @@ data "aws_iam_policy_document" "lambda_handler_ml_services" {
   }
 
   statement {
+    sid     = "PollyAccess"
     actions = [
       "polly:SynthesizeSpeech"
     ]
@@ -25,11 +27,21 @@ data "aws_iam_policy_document" "lambda_handler_ml_services" {
   }
 
   statement {
+    sid     = "AudioFileUploadToS3"
     actions = [
       "s3:PutObject",
       "s3:PutObjectAcl"
     ]
     resources = ["${aws_s3_bucket.this.arn}/audio/*"]
+  }
+
+  statement {
+    sid     = "ComprehendAccess"
+    actions = [
+      "comprehend:DetectDominantLanguage",
+      "comprehend:DetectSentiment"
+    ]
+    resources = ["*"]
   }
 }
 
