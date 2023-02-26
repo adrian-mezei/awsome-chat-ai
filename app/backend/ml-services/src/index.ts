@@ -2,12 +2,13 @@ import { Comprehend } from './modules/Comprehend';
 import { Polly } from './modules/Polly';
 import { Translate } from './modules/Translate';
 
+const comprehend = new Comprehend();
+const translate = new Translate();
+const polly = new Polly();
+
 export const handler = async (event: any, context: any): Promise<any> => {
     console.log(event);
-
-    const comprehend = new Comprehend();
-    const translate = new Translate();
-    const polly = new Polly();
+    if (event.body.length > 200) return { statusCode: 400, body: 'Request body too large.' };
 
     try {
         let responseBody;
