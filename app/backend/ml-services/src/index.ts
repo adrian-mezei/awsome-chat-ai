@@ -16,7 +16,7 @@ export const handler = async (event: any, context: any): Promise<any> => {
                 responseBody = await comprehend.detectSentiment(JSON.parse(event.body));
                 break;
             case '/translate':
-                responseBody = await translate.handle(JSON.parse(event.body));
+                responseBody = await translate.translateText(JSON.parse(event.body));
                 break;
             case '/polly':
                 responseBody = await polly.synthesizeSpeech(JSON.parse(event.body));

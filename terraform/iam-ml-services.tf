@@ -43,6 +43,14 @@ data "aws_iam_policy_document" "lambda_handler_ml_services" {
     ]
     resources = ["*"]
   }
+
+  statement {
+    sid     = "TranslateAccess"
+    actions = [
+      "translate:TranslateText"
+    ]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_policy" "ml_services" {
