@@ -16,6 +16,21 @@ data "aws_iam_policy_document" "lambda_handler_ml_services" {
     ]
     resources = ["${aws_cloudwatch_log_group.ml_services.arn}:*"]
   }
+
+  statement {
+    actions = [
+      "polly:SynthesizeSpeech"
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
+      "s3:PutObject",
+      "s3:PutObjectAcl"
+    ]
+    resources = ["${aws_s3_bucket.this.arn}/audio/*"]
+  }
 }
 
 resource "aws_iam_policy" "ml_services" {

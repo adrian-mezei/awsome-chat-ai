@@ -14,9 +14,16 @@ resource "aws_lambda_function" "ml_services" {
   role             = aws_iam_role.ml_services.arn
   filename         = data.archive_file.ml_services.output_path
   source_code_hash = data.archive_file.ml_services.output_base64sha256
+  timeout          = 15
 
   handler = "index.handler"
   runtime = "nodejs16.x"
+
+  environment {
+    variables = {
+      S3_BUCKET = aws_s3_bucket.this.bucket
+    }
+  }
 
   depends_on = [
     aws_cloudwatch_log_group.ml_services,

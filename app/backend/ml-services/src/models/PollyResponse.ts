@@ -1,3 +1,4 @@
 export interface PollyResponse {
-    audio: string;
+    audio?: string;
+    audioUrl: string;
 }
