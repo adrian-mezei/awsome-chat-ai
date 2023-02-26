@@ -1,4 +1,5 @@
 .terraform*
 terraform.tfstate*
-lambda.zip
+ml-services.zip
+chat.zip
 config.js

@@ -1,7 +1,7 @@
 import { PollyClient, SynthesizeSpeechCommand } from '@aws-sdk/client-polly';
 import { PollyRequest } from '../models/PollyRequest';
 import { PollyResponse } from '../models/PollyResponse';
-import { Readable, Stream } from 'stream';
+import { Readable, Stream, PassThrough } from 'stream';
 import { SynthesizeSpeechCommandOutput } from '@aws-sdk/client-polly/dist-types/commands';
 import { PutObjectAclCommand } from '@aws-sdk/client-s3/dist-types/commands';
 import { S3 } from './S3';
@@ -24,23 +24,24 @@ export class Polly {
             VoiceId: 'Aria',
         });
 
-        const pollyResponse = await this.polly.send(params);
-        const s3FileUrl = await this.s3.uploadAudio(pollyResponse.AudioStream as any);
+        const audioStream = (await this.polly.send(params)).AudioStream as Stream;
+        const streamS3 = audioStream.pipe(new PassThrough());
+        const streamBase64 = audioStream.pipe(new PassThrough());
 
         return {
-            // audio: await this.audioToBase64String(pollyResponse),
-            audioUrl: s3FileUrl,
+            audioUrl: await this.s3.uploadAudio(streamS3 as any),
+            audio: request.includeBase64 ? await this.streamToBase64String(streamBase64) : undefined,
         };
     }
 
-    private async audioToBase64String(output: SynthesizeSpeechCommandOutput): Promise<string> {
+    private async streamToBase64String(stream: any): Promise<string> {
         let audioBuffer: Buffer;
-        if (output instanceof Buffer) {
-            audioBuffer = output;
-        } else if (output instanceof Readable) {
-            audioBuffer = await this.streamToBuffer(output);
+        if (stream instanceof Buffer) {
+            audioBuffer = stream;
+        } else if (stream instanceof Readable) {
+            audioBuffer = await this.streamToBuffer(stream);
         } else {
-            console.error(output);
+            console.error(stream);
             throw new Error('Polly returned undefined or not Buffer or not Readable.');
         }
         return audioBuffer.toString('base64');
