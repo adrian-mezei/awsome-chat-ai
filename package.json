@@ -2,9 +2,7 @@
   "name": "awsome-chat-infra",
   "version": "0.1.0",
   "scripts": {
-    "build": "cd app/backend && npm run bundle",
-    "install": "cd app/backend && npm install && cd ../../terraform && terraform init"
-  },
-  "devDependencies": {},
-  "dependencies": {}
+    "build": "cd app/backend/chat && npm run bundle && cd ../ml-services && npm run bundle",
+    "install": "cd app/backend/chat && npm install && cd ../backend/ml-services && npm install && cd ../../../terraform && terraform init"
+  }
 }

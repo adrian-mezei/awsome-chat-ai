@@ -1,5 +1,8 @@
-output "api_gateway_url" {
-  value = "${aws_apigatewayv2_api.this.api_endpoint}/prod"
+output "api_gateway_urls" {
+  value = {
+    chat = "${aws_apigatewayv2_api.chat.api_endpoint}/prod"
+    ml_services = "${aws_apigatewayv2_api.ml_services.api_endpoint}/prod"
+  }
 }
 
 output "bucket_url" {

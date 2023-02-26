@@ -36,9 +36,9 @@ resource "aws_s3_object" "index" {
 resource "local_file" "config" {
   filename = "./config.js"
   content  = templatefile("${path.module}/../app/frontend/config.tpl", {
-    api_id = aws_apigatewayv2_api.this.id
+    api_id = aws_apigatewayv2_api.chat.id
     region = data.aws_region.this.name
-    stage  = aws_apigatewayv2_stage.this.name
+    stage  = aws_apigatewayv2_stage.chat.name
   })
 }
 
