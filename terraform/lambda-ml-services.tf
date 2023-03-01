@@ -35,5 +35,5 @@ resource "aws_lambda_permission" "ml_services" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.ml_services.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn = "${aws_apigatewayv2_api.ml_services.execution_arn}/*/*"
+  source_arn    = "${aws_apigatewayv2_api.ml_services.execution_arn}/*/*"
 }

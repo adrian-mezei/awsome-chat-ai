@@ -1,6 +1,6 @@
 output "api_gateway_urls" {
   value = {
-    chat = "${aws_apigatewayv2_api.chat.api_endpoint}/prod"
+    chat        = "${aws_apigatewayv2_api.chat.api_endpoint}/prod"
     ml_services = "${aws_apigatewayv2_api.ml_services.api_endpoint}/prod"
   }
 }

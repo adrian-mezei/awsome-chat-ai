@@ -21,7 +21,7 @@ module "template_files" {
   base_dir = "${path.module}/../app/frontend/"
 }
 
-resource "aws_s3_object" "index" {
+resource "aws_s3_object" "static" {
   for_each = module.template_files.files
 
   bucket       = aws_s3_bucket.this.bucket
@@ -35,7 +35,7 @@ resource "aws_s3_object" "index" {
 
 resource "local_file" "config" {
   filename = "./config.js"
-  content  = templatefile("${path.module}/../app/frontend/config.tpl", {
+  content = templatefile("${path.module}/../app/frontend/config.tpl", {
     api_id = aws_apigatewayv2_api.chat.id
     region = data.aws_region.this.name
     stage  = aws_apigatewayv2_stage.chat.name
@@ -43,9 +43,9 @@ resource "local_file" "config" {
 }
 
 resource "aws_s3_object" "config" {
-  bucket = aws_s3_bucket.this.bucket
-  key    = "config.js"
-  source = "./config.js"
+  bucket       = aws_s3_bucket.this.bucket
+  key          = "config.js"
+  source       = "./config.js"
   content_type = "text/javascript"
 
   acl = "public-read"
@@ -56,9 +56,9 @@ resource "aws_s3_object" "config" {
 resource "aws_s3_bucket_public_access_block" "this" {
   bucket = aws_s3_bucket.this.bucket
 
-  block_public_acls = false
-  block_public_policy = false
-  ignore_public_acls = false
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
   restrict_public_buckets = false
 }
 

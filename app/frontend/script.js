@@ -1,6 +1,7 @@
 let websocket;
 let newLineIsPressed = false;
 let profileImageTimeout = null;
+let lexSessionId = null;
 initWebSocket();
 
 document.getElementById('message').addEventListener('keyup', event => {
@@ -75,9 +76,9 @@ function onMessage(evt) {
     let parsedData = tryParseJSON(evt.data);
     let message = parsedData ? parsedData.message : evt.data;
     let senderName = parsedData ? parsedData.senderName : '';
-    let senderGravatar = parsedData ? parsedData.senderGravatar : '';
+    lexSessionId = parsedData.lexSessionId;
 
-    writeToScreenLeft(message, senderGravatar, senderName);
+    writeToScreenLeft(message, senderName);
 }
 
 function onError(evt) {
@@ -89,7 +90,7 @@ function doSend(message) {
         let senderGravatar = document.getElementById('gravatar').value;
         let senderName = document.getElementById('name').value;
 
-        const stringified = JSON.stringify({ message, senderName, senderGravatar });
+        const stringified = JSON.stringify({ message, senderName, senderGravatar, lexSessionId });
 
         writeToScreenRight(message, senderGravatar);
         websocket.send(stringified);
@@ -123,8 +124,8 @@ function writeSystemMessage(message) {
     addToOutput(div);
 }
 
-function writeToScreenLeft(message, senderGravatar, senderName) {
-    let imgGravatar = getLeftImage(senderGravatar);
+function writeToScreenLeft(message, senderName) {
+    let imgGravatar = getLeftImage();
 
     let preMessage = document.createElement('p');
     preMessage.classList.add('left-message-text');
@@ -164,12 +165,10 @@ function addToOutput(element) {
     output.scrollTop = output.scrollHeight;
 }
 
-function getLeftImage(name) {
+function getLeftImage() {
     let img = document.createElement('img');
     img.classList.add('left-image');
-
-    let nameMD5 = CryptoJS.MD5(name).toString();
-    img.src = `http://www.gravatar.com/avatar/${nameMD5}?d=mp`;
+    img.src = 'lex.svg';
 
     return img;
 }

@@ -20,8 +20,11 @@ resource "aws_lambda_function" "chat" {
 
   environment {
     variables = {
-      APIGW_ENDPOINT = "https://${aws_apigatewayv2_api.chat.id}.execute-api.${local.region}.amazonaws.com/prod"
-      TABLE_NAME     = local.dynamodb_table_name
+      APIGW_ENDPOINT   = "https://${aws_apigatewayv2_api.chat.id}.execute-api.${local.region}.amazonaws.com/prod"
+      TABLE_NAME       = local.dynamodb_table_name
+      LEX_BOT_ID       = var.lex_bot_id
+      LEX_BOT_ALIAS_ID = var.lex_bot_alias_id
+      LEX_LOCALE_ID    = var.lex_locale_id
     }
   }
 
@@ -35,5 +38,5 @@ resource "aws_lambda_permission" "chat" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.chat.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn = "${aws_apigatewayv2_api.chat.execution_arn}/*/*"
+  source_arn    = "${aws_apigatewayv2_api.chat.execution_arn}/*/*"
 }

@@ -3,3 +3,4 @@ terraform.tfstate*
 ml-services.zip
 chat.zip
 config.js
+terraform.tfvars

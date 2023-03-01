@@ -15,7 +15,7 @@ export const handler = async (event: any, context: any): Promise<any> => {
                 await handler.disconnect(cid);
                 break;
             default:
-                await handler.default(cid, event.body);
+                await handler.default(cid, JSON.parse(event.body));
                 break;
         }
 

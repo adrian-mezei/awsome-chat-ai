@@ -1,5 +1,6 @@
 import { ApiGatewayManagementApiClient, PostToConnectionCommand } from '@aws-sdk/client-apigatewaymanagementapi';
 import { TextEncoder } from 'util';
+import { LexResponse } from '../models/LexResponse';
 
 export class ApiGW {
     private apiGW: ApiGatewayManagementApiClient;
@@ -10,10 +11,10 @@ export class ApiGW {
         });
     }
 
-    async postToConnection(connectionId: string, data: string) {
+    async postToConnection(connectionId: string, data: LexResponse) {
         const command = new PostToConnectionCommand({
             ConnectionId: connectionId,
-            Data: new TextEncoder().encode(data),
+            Data: new TextEncoder().encode(JSON.stringify(data)),
         });
         return this.apiGW.send(command);
     }

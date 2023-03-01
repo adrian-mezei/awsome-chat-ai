@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "lambda_handler_ml_services" {
   }
 
   statement {
-    sid     = "PollyAccess"
+    sid = "PollyAccess"
     actions = [
       "polly:SynthesizeSpeech"
     ]
@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "lambda_handler_ml_services" {
   }
 
   statement {
-    sid     = "AudioFileUploadToS3"
+    sid = "AudioFileUploadToS3"
     actions = [
       "s3:PutObject",
       "s3:PutObjectAcl"
@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "lambda_handler_ml_services" {
   }
 
   statement {
-    sid     = "ComprehendAccess"
+    sid = "ComprehendAccess"
     actions = [
       "comprehend:DetectDominantLanguage",
       "comprehend:DetectSentiment"
@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "lambda_handler_ml_services" {
   }
 
   statement {
-    sid     = "TranslateAccess"
+    sid = "TranslateAccess"
     actions = [
       "translate:TranslateText"
     ]
@@ -54,12 +54,12 @@ data "aws_iam_policy_document" "lambda_handler_ml_services" {
 }
 
 resource "aws_iam_policy" "ml_services" {
-  name = "${local.lambda_function_ml_services_name}RolePolicy"
+  name   = "${local.lambda_function_ml_services_name}RolePolicy"
   policy = data.aws_iam_policy_document.lambda_handler_ml_services.json
 }
 
 resource "aws_iam_role" "ml_services" {
-  name = "${local.lambda_function_ml_services_name}Role"
+  name               = "${local.lambda_function_ml_services_name}Role"
   assume_role_policy = data.aws_iam_policy_document.lambda_handler_assume_role_ml_services.json
 }
 
