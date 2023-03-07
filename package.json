@@ -3,6 +3,6 @@
     "version": "0.1.0",
     "scripts": {
         "build": "cd app/backend/chat && npm run bundle && cd ../ml-services && npm run bundle",
-        "install": "cd app/backend/chat && npm install && cd ../backend/ml-services && npm install && cd ../../../terraform && terraform init"
+        "install": "cd app/backend/chat && npm install && cd ../ml-services && npm install && cd ../../../terraform && terraform init"
     }
 }

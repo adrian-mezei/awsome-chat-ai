@@ -1,1 +1,0 @@
-const webSocketUri = 'wss://${api_id}.execute-api.${region}.amazonaws.com/${stage}/';

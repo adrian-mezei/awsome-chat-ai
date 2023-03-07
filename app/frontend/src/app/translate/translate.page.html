@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Translate
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label>Source Language</ion-label>
+        <ion-item fill="outline">
+          <ion-select name="source-language" interface="action-sheet" [(ngModel)]="sourceLanguage"
+                      placeholder="Select target language">
+            <ion-select-option value="auto">Automatic</ion-select-option>
+            <ion-select-option value="en">English</ion-select-option>
+            <ion-select-option value="hu">Hungarian</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Source text</ion-label>
+        <ion-item fill="outline" color="primary" counter="true">
+          <ion-textarea name="source" [(ngModel)]="source" maxlength="100" placeholder="Type something here"
+                        [autoGrow]="true">
+          </ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Target Language</ion-label>
+        <ion-item fill="outline">
+          <ion-select name="target-language" interface="action-sheet" [(ngModel)]="targetLanguage"
+                      placeholder="Select target language">
+            <ion-select-option value="hu">Hungarian</ion-select-option>
+            <ion-select-option value="de">German</ion-select-option>
+            <ion-select-option value="es">Spanish</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="submit()" [disabled]="!formValid()" type="submit" expand="block">Translate</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="error">
+      <ion-col>
+        <ion-card color="danger">
+          <ion-card-content>
+            Error while translating the text.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="target">
+      <ion-col>
+        <ion-item fill="outline" color="primary">
+          <ion-textarea name="target" [value]="target"
+                        [autoGrow]="true" [disabled]="true">
+          </ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

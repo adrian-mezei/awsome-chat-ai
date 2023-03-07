@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Speech</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label>Source text</ion-label>
+        <ion-item fill="outline" color="primary" counter="true">
+          <ion-textarea name="source" [(ngModel)]="source" maxlength="100" placeholder="Type something here"
+                        [autoGrow]="true">
+          </ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="submit()" [disabled]="!source || playing" type="submit" expand="block">Listen</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="error">
+      <ion-col>
+        <ion-card color="danger">
+          <ion-card-content>
+            Error while fetching or playing speech.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

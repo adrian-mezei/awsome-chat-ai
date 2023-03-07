@@ -1,6 +1,13 @@
 resource "aws_apigatewayv2_api" "ml_services" {
   name          = "AWSomeChat-MLServices"
   protocol_type = "HTTP"
+
+  cors_configuration {
+    allow_credentials = false
+    allow_headers     = ["*"]
+    allow_methods     = ["*"]
+    allow_origins     = ["*"]
+  }
 }
 
 resource "aws_apigatewayv2_integration" "ml_services" {

@@ -1,10 +1,12 @@
 variable "lex_bot_id" {
   type        = string
+  default     = "AQJRMIWVG8"
   description = "The ID of the Lex chatbot."
 }
 
 variable "lex_bot_alias_id" {
   type        = string
+  default     = "MPAOVKGFQN"
   description = "The alias of the Lex chatbot."
 }
 
