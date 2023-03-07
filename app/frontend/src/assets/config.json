@@ -1,0 +1,4 @@
+{
+  "mlServicesBase": "https://5wh9e2xiy5.execute-api.eu-west-1.amazonaws.com/prod",
+  "chatServiceBase": "wss://yapiwolfd6.execute-api.eu-west-1.amazonaws.com/prod"
+}

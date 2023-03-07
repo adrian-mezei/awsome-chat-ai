@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>More</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list [inset]="true">
+    <ion-item href="https://snapsoft.typeform.com/to/WEIXkmAJ" target="_blank">
+      <ion-icon id="feedback-icon" slot="start" src="assets/chatbox-ellipses-outline.svg"></ion-icon>
+      <ion-label>Feedback survey</ion-label>
+      <ion-icon src="assets/open-outline.svg" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item href="https://www.meetup.com/aws-serverless-budapest/" target="_blank">
+      <ion-icon id="meetup-icon" slot="start" src="assets/meetup.svg"></ion-icon>
+      <ion-label>AWS Serverless Budapest</ion-label>
+      <ion-icon src="assets/open-outline.svg" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item href="https://www.linkedin.com/groups/9103310/" target="_blank">
+      <ion-icon color="black" slot="start" src="assets/logo-linkedin.svg"></ion-icon>
+      <ion-label>AWS Serverless Budapest</ion-label>
+      <ion-icon src="assets/open-outline.svg" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-list [inset]="true">
+    <ion-item detail="true" (click)="logout()">
+      <ion-icon color="black" slot="start" src="assets/exit-outline.svg"></ion-icon>
+      <ion-label>Log out {{name}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

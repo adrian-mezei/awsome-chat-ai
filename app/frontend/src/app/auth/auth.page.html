@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-icon src="assets/pizza.svg" color="primary"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h1>AWSomeChat - AI/ML edition</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item fill="outline">
+          <ion-label position="floating">Please enter your full name!</ion-label>
+          <ion-input type="text" [(ngModel)]="name" name="name"></ion-input>
+        </ion-item>
+        <ion-button [disabled]="!name" expand="block" (click)="save()" type="submit">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,27 @@
+ion-content {
+  position: relative;
+  height: 200px;
+  margin: 0 auto;
+  padding: 20px;
+  resize: both;
+  overflow: auto;
+}
+
+ion-content ion-grid {
+  width: 80%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  resize: both;
+  overflow: auto;
+}
+
+ion-icon {
+  font-size: 68px;
+}
+
+ion-col {
+  text-align: center;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "AWSomeChat",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Pizzabot
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="reload()">
+        <ion-icon src="assets/reload-outline.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" #scroll>
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngFor="let message of messages">
+        <ion-col [offset]="message.senderName === name ? 2 : 0" size="10">
+          <ion-card [color]="message.senderName === name ? 'primary' : 'medium'">
+            <ion-card-content>
+              {{message.message}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+    <form (ngSubmit)="send()" *ngIf="!complete">
+      <ion-toolbar>
+          <ion-searchbar  name="message-input" [(ngModel)]="message" id="message-input" search-icon="pizza" placeholder="Aa"></ion-searchbar>
+          <ion-buttons slot="primary">
+            <ion-button type="submit" [disabled]="!message">
+              <ion-icon slot="icon-only" src="assets/send.svg"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+      </ion-toolbar>
+    </form>
+  <ion-row *ngIf="complete">
+    <ion-col>
+      <ion-card color="danger">
+        <ion-card-content>
+          Your session has ended. Hit <ion-icon src="assets/reload-outline.svg"></ion-icon> to restart!
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-footer>

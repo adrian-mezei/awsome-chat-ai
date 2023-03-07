@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Sentiment
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label>How did you like this meetup so far?</ion-label>
+          <ion-item fill="outline" color="primary" counter="true">
+            <ion-textarea name="source" [(ngModel)]="source" maxlength="100" placeholder="Type something here"
+                          [autoGrow]="true">
+            </ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="submit()" [disabled]="!source" type="submit" expand="block">Analyse sentiment</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="error">
+        <ion-col>
+          <ion-card color="danger">
+            <ion-card-content>
+              Error while analysing the text.
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="target">
+        <ion-col id="sentiment-icon" [ngSwitch]="target.sentiment">
+          <ng-container *ngSwitchCase="'POSITIVE'">🙂</ng-container>
+          <ng-container *ngSwitchCase="'NEGATIVE'">🙁</ng-container>
+          <ng-container *ngSwitchCase="'NEUTRAL'">😐</ng-container>
+          <ng-container *ngSwitchCase="'MIXED'">🤔</ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="target">
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <h5>Positive</h5>
+              <p>{{target.sentimentScore.positive}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h5>Negative</h5>
+              <p>{{target.sentimentScore.negative}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h5>Neutral</h5>
+              <p>{{target.sentimentScore.neutral}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h5>Mixed</h5>
+              <p>{{target.sentimentScore.mixed}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
